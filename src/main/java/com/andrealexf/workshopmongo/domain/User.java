@@ -2,11 +2,16 @@ package com.andrealexf.workshopmongo.domain;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="tb_users")
 public class User implements Serializable{
  
 	private static final long serialVersionUID = 1L;
 	//para que os objetos sejam gravados em arquivo/trafeguem na rede
 	
+	@Id 
 	private String id;
 	private String name;
 	private String email;
