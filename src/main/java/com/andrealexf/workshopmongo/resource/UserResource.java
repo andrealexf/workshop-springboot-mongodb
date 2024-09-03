@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.andrealexf.workshopmongo.domain.Post;
 import com.andrealexf.workshopmongo.domain.User;
 import com.andrealexf.workshopmongo.dto.UserDTO;
 import com.andrealexf.workshopmongo.services.UserService;
@@ -68,5 +69,12 @@ public class UserResource {//controlador rest
 		obj.setId(id);//o Id da URL que vai ser qula será editado
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+		
+		User user = service.findById(id);//encontra o user pelo Id e depois pega o post de tal user
+		return ResponseEntity.ok().body(user.getPosts());
 	}
 }
