@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,5 +50,12 @@ public class UserResource {//controlador rest
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		//dá o endereço do novo objeto que foi inserido
 		return ResponseEntity.created(uri).body(obj);//created gera o 501 -> quando cria algo
+	}
+	
+	@DeleteMapping(value="/{id}")
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+		
+		service.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 }
